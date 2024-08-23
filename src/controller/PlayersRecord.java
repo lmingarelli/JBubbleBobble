@@ -28,7 +28,7 @@ import model.Player;
 
 public class PlayersRecord {
 	private static String fileName = "players.xml";
-	private static String filePath = "data/" + fileName;
+	private static String filePath = "assets/data/" + fileName;
 
 	// Return false if the file already exists, return true if this method has
 	// created it. The file will be created with current player info
