@@ -24,6 +24,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import model.GameModel;
 import model.Player;
 
 public class PlayersRecord {
@@ -289,6 +290,7 @@ public class PlayersRecord {
 			Document document = builder.parse(xmlFile);
 
 			// Access elements by tag name
+			Player player = GameModel.getInstance().getPlayer();
 			NodeList nodeList = document.getElementsByTagName("player");
 			for(int i = 0; i < nodeList.getLength(); i++){
 				// Current node object and nickname
@@ -299,13 +301,18 @@ public class PlayersRecord {
 
 				// Best score
 				int currentBestScore = 0;
-				NodeList scoreNodeList = currentNodeAsElement
-						.getElementsByTagName("bestScore");
-				if(scoreNodeList != null && scoreNodeList.getLength() > 0){
-					NodeList subList = scoreNodeList.item(0).getChildNodes();
+				if(currentNickname.equals(player.getNickname())){
+					currentBestScore = player.getBestScore();
+				}else{
+					NodeList scoreNodeList = currentNodeAsElement
+							.getElementsByTagName("bestScore");
+					if(scoreNodeList != null && scoreNodeList.getLength() > 0){
+						NodeList subList = scoreNodeList.item(0).getChildNodes();
 
-					if(subList != null && subList.getLength() > 0){
-						currentBestScore = Integer.parseInt(subList.item(0).getNodeValue());
+						if(subList != null && subList.getLength() > 0){
+							currentBestScore = Integer
+									.parseInt(subList.item(0).getNodeValue());
+						}
 					}
 				}
 
@@ -345,7 +352,8 @@ public class PlayersRecord {
 				// Sorting the leaderboard by best scores
 				currentLeaderboard = new ArrayList<Player>(
 						currentLeaderboard.stream()
-								.sorted(Comparator.comparing(player -> -player.getBestScore()))
+								.sorted(Comparator
+										.comparing(currentPlayer -> -currentPlayer.getBestScore()))
 								.collect(Collectors.toList()));
 			}
 		}catch (ParserConfigurationException e){

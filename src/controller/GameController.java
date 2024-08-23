@@ -84,7 +84,7 @@ public class GameController implements Observer {
 
 		gameView.loadPlayerInfoOnPage();
 
-		gameView.loadLeaderboard(this.playersRecord.getLeaderboard());
+		gameView.loadLeaderboard();
 	}
 
 	public void onExit() {
@@ -187,5 +187,9 @@ public class GameController implements Observer {
 				pressedKeys.remove(pressedKeys.indexOf(e.getKeyCode()));
 			}
 		}
+	}
+
+	public PlayersRecord getPlayersRecord() {
+		return this.playersRecord;
 	}
 }

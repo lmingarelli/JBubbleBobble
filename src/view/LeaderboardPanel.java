@@ -10,11 +10,22 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.GameController;
 import model.GameState;
 import model.Player;
 
 public class LeaderboardPanel extends JPanel {
-	public LeaderboardPanel(ArrayList<Player> leaderboard) {
+	private ArrayList<Player> leaderboard;
+
+	public LeaderboardPanel() {
+		this.drawPanel();
+	}
+
+	public void drawPanel() {
+		this.removeAll();
+
+		this.updateLeaderboard();
+
 		setLayout(new GridBagLayout());
 
 		add(new JPanel(new GridBagLayout()) {
@@ -61,4 +72,8 @@ public class LeaderboardPanel extends JPanel {
 		});
 	}
 
+	private void updateLeaderboard() {
+		this.leaderboard = GameController.getInstance().getPlayersRecord()
+				.getLeaderboard();
+	}
 }

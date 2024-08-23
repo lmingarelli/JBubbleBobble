@@ -9,7 +9,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,7 +21,6 @@ import javax.swing.UIManager;
 import controller.GameController;
 import model.GameModel;
 import model.GameState;
-import model.Player;
 
 @SuppressWarnings("deprecation")
 public class GameView extends JFrame implements Observer {
@@ -115,8 +113,8 @@ public class GameView extends JFrame implements Observer {
 		deck.add(userPanel, GameState.USERPAGE.name());
 	}
 
-	public void loadLeaderboard(ArrayList<Player> leaderboard) {
-		this.leaderboardPanel = new LeaderboardPanel(leaderboard);
+	public void loadLeaderboard() {
+		this.leaderboardPanel = new LeaderboardPanel();
 		deck.add(leaderboardPanel, GameState.LEADERBOARD.name());
 	}
 
@@ -143,7 +141,8 @@ public class GameView extends JFrame implements Observer {
 					break;
 				case GameState.LEADERBOARD:
 					((CardLayout) deck.getLayout()).show(deck, (newState).name());
-					this.userPanel.requestFocusInWindow();
+					this.leaderboardPanel.requestFocusInWindow();
+					leaderboardPanel.drawPanel();
 					break;
 				case GameState.EXIT:
 					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
