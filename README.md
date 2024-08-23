@@ -44,7 +44,7 @@ The main method is responsible for loading the instances (single, since Singleto
 `GameController.java` is the managing class of the controller package. It plays a crucial role as the link between the view and the model, ensuring that the Observer-Observable mechanism is initialized between the model and controller/view. It also manages keyboard input mapping and the class dedicated to sound effects.
 
 `PlayersRecord.java` handles reading and writing player data from an external XML file. During the first phase of the game (the nickname entry), if a nickname is not present in the file, it is created; otherwise, its data is retrieved from the XML.  
-At the end of each game, the best score is updated in real-time and is immediately visible on the user page.  
+At the end of each game, the best score is updated in real-time and is immediately visible on the user page. The leaderboard is also updated with the player's current best score.  
 Upon exiting the window, all player data is saved to the XML.
 <br/>
 
