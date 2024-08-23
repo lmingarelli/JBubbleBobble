@@ -4,6 +4,4 @@
 .DS_Store
 .class
 
-/bin
-
-players.xml
+/assets/data/players.xml

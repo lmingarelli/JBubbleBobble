@@ -36,7 +36,13 @@ public class PlayersRecord {
 		File file = new File(filePath);
 		boolean isFileCreated = false;
 
+		File dataFolder = new File("assets/data/");
+
 		try{
+			if(!dataFolder.exists()){
+				dataFolder.mkdir();
+			}
+
 			if(file.createNewFile()){
 				// Create a DocumentBuilder
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
